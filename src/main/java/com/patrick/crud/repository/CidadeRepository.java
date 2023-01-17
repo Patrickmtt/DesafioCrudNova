@@ -9,6 +9,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-    List<Cliente> findByCidade(Cidade cidade);
+public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 }

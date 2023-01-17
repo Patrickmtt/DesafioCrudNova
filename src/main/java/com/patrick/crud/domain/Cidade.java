@@ -1,34 +1,37 @@
 package com.patrick.crud.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Cidade{
-
+public class Cidade implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String nome;
-    private String Estado;
+    @JsonIgnore
+    @OneToMany(mappedBy = "cidade")
+    private List<Cliente> clientes = new ArrayList<>();
 
     public Cidade(){
 
     }
-    public String getEstado() {
-        return Estado;
+    public Cidade(Integer id, String nome){
+        super();
+        this.id = id;
+        this.nome = nome;
     }
 
-    public void setEstado(String estado) {
-        Estado = estado;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,5 +41,13 @@ public class Cidade{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 }
